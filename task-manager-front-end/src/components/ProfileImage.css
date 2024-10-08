@@ -1,0 +1,7 @@
+#profileImg {
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid white;
+}
