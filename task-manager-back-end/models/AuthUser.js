@@ -17,11 +17,11 @@ const signupSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true,
+      required: [true, "password required"],
       minlength: [8, "Password atleast 8 charecters long"],
-      match: [
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
-      ],
+      //   match: [
+      //     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      //   ],
     },
     gender: {
       type: String,
@@ -41,9 +41,9 @@ const signupSchema = new mongoose.Schema(
       type: String,
       required: [true, "Address requried"],
     },
-    status: {
+    category: {
       type: String,
-      required: [true, "status required"],
+      required: [true, "Category required"],
     },
     purpose: {
       type: String,
@@ -59,6 +59,6 @@ const signupSchema = new mongoose.Schema(
   }
 );
 
-const SignupModel = mongoose.model("signup", signupSchema);
+const AuthUser = mongoose.model("user", signupSchema);
 
-module.exports = SignupModel;
+module.exports = AuthUser;
