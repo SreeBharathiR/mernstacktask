@@ -18,8 +18,13 @@ exports.updateTask = async (req, res, next) => {
   // const {title,endDate,taskStatus}=req.body;
   try {
     let task = await Task.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
+      new: true, //task -id (token id match)
     });
+    if (!task) {
+      return res.status(400).json({
+        message: "Task not available which you want to update",
+      });
+    }
     res.status(200).json({
       message: "Task Updated",
       task,
@@ -32,6 +37,11 @@ exports.updateTask = async (req, res, next) => {
 exports.deleteTask = async (req, res, next) => {
   try {
     let task = await Task.findByIdAndDelete(req.params.id);
+    if (!task) {
+      return res.status(400).json({
+        message: "Task not available which you want to delete",
+      });
+    }
     res.status(202).json({
       message: "Task Deleted",
       task,

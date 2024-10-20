@@ -17,7 +17,7 @@ const signupSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: [true, "password required"],
+      required: [true, "password required"], //pre (authuser.pre(which operation before - save )
       minlength: [8, "Password atleast 8 charecters long"],
       //   match: [
       //     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
