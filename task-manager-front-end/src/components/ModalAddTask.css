@@ -1,0 +1,42 @@
+dialog {
+  height: 200px;
+  width: 310px;
+  border: none;
+  border-radius: 20px;
+  top: 50vh;
+  left: 40vw;
+  /* border: 1px solid black; */
+  box-shadow: 10px 10px 10px rgb(0, 0, 0, 0.2);
+}
+#modalP {
+  font-size: 22px;
+  position: absolute;
+  top: 40px;
+  left: 20px;
+}
+.buttons {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  position: absolute;
+  top: 110px;
+  left: 50px;
+}
+.modalButton1 {
+  height: 28px;
+  width: 70px;
+  background-color: red;
+  color: aliceblue;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgb(0, 0, 0, 0.2);
+}
+.modalButton2 {
+  height: 28px;
+  width: 70px;
+  background-color: darkgrey;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgb(0, 0, 0, 0.2);
+}
