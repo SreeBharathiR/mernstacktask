@@ -1,22 +1,64 @@
-import React, { createContext, useRef, useState } from "react";
+import React, { createContext, useEffect, useRef, useState } from "react";
 import api from "../api";
 const TaskContext = createContext();
 export const TaskProvider = ({ children }) => {
-  const [dataForm, setDataForm] = useState(null);
-  const [getData, setGetData] = useState(null);
+  const [dataForm, setDataForm] = useState({
+    title: "",
+    endDate: "",
+    taskStatus: "",
+  });
+  const [getData, setGetData] = useState([]);
   const taskRef = useRef();
-  const handleAddTask = async () => {
+
+  const getAllTasks = async () => {
     try {
-      const response = await api.post("/tasks/", dataForm);
-      const { title, endData, taskStatus } = response.task;
-      setGetData({
-        title,
-        endData,
-        taskStatus,
+      const response = await api.get("/tasks/");
+      setGetData(response.data.tasks);
+      //   console.log("get all" + response.data.tasks);
+      console.log(getData);
+    } catch (e) {
+      const errorMsg = e.response?.data?.message || "Getting All Tasks Failed";
+      console.error(errorMsg);
+    }
+  };
+
+  const handleAddTask = async () => {
+    console.log(dataForm);
+    const formatDate = new Date(dataForm.endDate).toLocaleDateString("en-GB");
+    const taskData = { ...dataForm, endDate: formatDate };
+    try {
+      const response = await api.post("/tasks/", taskData);
+      const { title, endDate, taskStatus, id } = response.data.task;
+      setGetData([...getData, response.data.task]);
+      setDataForm({
+        title: "",
+        endDate: "",
+        taskStatus: "",
       });
-      console.log(response.message);
+
+      closeModalWindow();
     } catch (e) {
       const errorMsg = e.response?.data?.message || "Task Creation Failed";
+      console.error(errorMsg);
+    }
+  };
+  const handleDeleteTask = async (id) => {
+    try {
+      const response = await api.delete(`/tasks/${id}`);
+      getAllTasks();
+      console.log("Deleted");
+    } catch (e) {
+      const errorMsg = e.response?.data?.message || "Task Deletion Failed";
+      console.error(errorMsg);
+    }
+  };
+  const handleUpdateTask = async (id, updateData) => {
+    try {
+      console.log(updateData);
+      const response = await api.patch(`/tasks/${id}`, updateData);
+      getAllTasks();
+    } catch (e) {
+      const errorMsg = e.response?.data?.message || "Task Update Failed";
       console.error(errorMsg);
     }
   };
@@ -30,10 +72,14 @@ export const TaskProvider = ({ children }) => {
     <TaskContext.Provider
       value={{
         handleAddTask,
+        handleDeleteTask,
+        handleUpdateTask,
         taskRef,
         showModalWindow,
         closeModalWindow,
         setDataForm,
+        getAllTasks,
+        getData,
       }}
     >
       {children}

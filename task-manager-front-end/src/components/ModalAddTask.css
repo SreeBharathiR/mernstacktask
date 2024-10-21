@@ -1,9 +1,9 @@
 dialog {
-  height: 200px;
+  height: 300px;
   width: 310px;
   border: none;
   border-radius: 20px;
-  top: 50vh;
+  top: 20vh;
   left: 40vw;
   /* border: 1px solid black; */
   box-shadow: 10px 10px 10px rgb(0, 0, 0, 0.2);
@@ -14,13 +14,28 @@ dialog {
   top: 40px;
   left: 20px;
 }
+.fields {
+  width: 80%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: fit-content;
+  top: 80px;
+  left: 20px;
+}
+.inputField {
+  font-size: 15px;
+  width: 100%;
+  height: 35px;
+}
 .buttons {
   width: 200px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   position: absolute;
-  top: 110px;
+  bottom: 30px;
   left: 50px;
 }
 .modalButton1 {
@@ -39,4 +54,7 @@ dialog {
   border: none;
   border-radius: 10px;
   box-shadow: 5px 5px 10px rgb(0, 0, 0, 0.2);
+}
+.selectStatus {
+  height: 35px;
 }

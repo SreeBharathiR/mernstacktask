@@ -8,6 +8,7 @@ import AdminDashboardPage from "./components/AdminDashboardPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
 import { TaskProvider } from "./context/TaskContext";
+import ProfilePage from "./components/ProfilePage";
 
 function App() {
   return (
@@ -21,6 +22,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <UserDashboardPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <ProfilePage />
                   </ProtectedRoute>
                 }
               />
